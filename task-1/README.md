@@ -1,20 +1,19 @@
 # Description of your result
 
-You can describe your results in any language that is convenient for you, not just English.
+1. Код вычисляет средний возраст всей техники на всех угодьях, учитывая обе структуры (mapBefore2010 и mapAfter2010).
+2. Сортирует всю технику по возрасту, затем взяв 50% самой старой техники, определите её средний возраст.
+
+p.s. одна и та же единица техники может быть приписана к нескольким различным угодьям.
 
 ## Description
 
-[Describe what you have done]
+1. Обработал mapBefore2010, затем mapAfter2010.
+2. Рассчитал средний возраст всей техники.
+3. Объединил технику из обоих карт в один список.
+4. Отсортировал технику по возрасту (от старых к новым).
+5. Нашёл 50% самой старой техники.
+6. Рассчитал средний возраст этой техники.
 
 ## How to
 
-[Describe how to run your application if there are any issues]
-
-## Problems
-
-[Describe the problems you encountered]
-
-## More
-
-[Here you can brag about what you managed to implement or do something beyond the task]
-
+Запуск производится через VSCode. Предварительно должен быть установлен пакет Dart-sdk или Flatter-sdk.

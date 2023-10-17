@@ -152,44 +152,8 @@ final mapAfter2010 = {
 };
 
 void main() {
-  List<DateTime> allReleaseDates = [];
-
-  // Обработка mapBefore2010
-  mapBefore2010.forEach((country, territories) {
-    territories.forEach((territory) {
-      territory.machineries.forEach((machinery) {
-        allReleaseDates.add(machinery.releaseDate);
-      });
-    });
-  });
-
-  // Обработка mapAfter2010
-  mapAfter2010.forEach((country, territories) {
-    territories.forEach((territory) {
-      territory.machineries.forEach((machinery) {
-        allReleaseDates.add(machinery.releaseDate);
-      });
-    });
-  });
-
-  // Рассчитываем средний возраст всей техники
-  if (allReleaseDates.isNotEmpty) {
-    DateTime currentDate = DateTime.now();
-    int totalAgeInYears = 0;
-
-    allReleaseDates.forEach((releaseDate) {
-      int ageInYears = currentDate.year - releaseDate.year;
-      totalAgeInYears += ageInYears;
-    });
-
-    double averageAge = totalAgeInYears / allReleaseDates.length;
-    print('Средний возраст всей техники на всех угодьях: ${averageAge.toStringAsFixed(2)} лет');
-  } else {
-    print('На угодьях нет техники.');
-  }
-
-  // Объединяем технику из обоих карт в один список
-  List<AgriculturalMachinery> allMachineries = [];
+  // Объединяем технику из обоих карт в множество
+  Set<AgriculturalMachinery> allMachineries = {};
 
   mapBefore2010.forEach((country, territories) {
     territories.forEach((territory) {
@@ -204,11 +168,12 @@ void main() {
   });
 
   // Сортируем технику по возрасту (от старых к новым)
-  allMachineries.sort((a, b) => a.releaseDate.compareTo(b.releaseDate));
+  List<AgriculturalMachinery> sortedMachineries = allMachineries.toList()
+    ..sort((a, b) => a.releaseDate.compareTo(b.releaseDate));
 
   // Находим 50% самой старой техники
-  int halfIndex = (allMachineries.length / 2).ceil();
-  List<AgriculturalMachinery> oldestHalfMachineries = allMachineries.sublist(0, halfIndex);
+  int halfIndex = (sortedMachineries.length / 2).ceil();
+  List<AgriculturalMachinery> oldestHalfMachineries = sortedMachineries.sublist(0, halfIndex);
 
   // Рассчитываем средний возраст этой техники
   if (oldestHalfMachineries.isNotEmpty) {
